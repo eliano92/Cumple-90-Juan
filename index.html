@@ -1,1 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis 90 Años - Juan Filardo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Alex+Brush&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-deep: #0f141c;
+            --card-bg: rgba(23, 31, 43, 0.95);
+            --gold-primary: #d4af37;
+            --gold-light: #f7e7ce;
+            --text-white: #ffffff;
+            --text-muted: #a0acba;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 12px;
+            background-image: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.15) 0%, transparent 70%), radial-gradient(circle at 50% 100%, #080b10 0%, #0f141c 100%);
+            background-attachment: fixed;
+        }
+
+        .card {
+            background: var(--card-bg);
+            max-width: 480px;
+            width: 100%;
+            padding: 45px 25px;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(212, 175, 55, 0.2);
+            border: 2px solid var(--gold-primary);
+            position: relative;
+            text-align: center;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 6px; left: 6px; right: 6px; bottom: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            pointer-events: none;
+        }
+
+        .main-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .years-text {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin: 10px 0 5px 0;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .name {
+            font-family: 'Alex Brush', cursive;
+            font-size: 3.8rem;
+            color: var(--gold-light);
+            margin: 5px 0 15px 0;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .quote {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            padding: 0 10px;
+        }
+
+        .divider-dots {
+            border-top: 2px dotted var(--gold-primary);
+            margin: 20px 0;
+            opacity: 0.5;
+        }
+
+        .event-info-grid {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 15px 0;
+        }
+
+        .info-col {
+            flex: 1;
+        }
+
+        .vertical-dot-line {
+            width: 1px;
+            height: 60px;
+            border-left: 2px dotted var(--gold-primary);
+            opacity: 0.5;
+        }
+
+        .col-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .col-main {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin: 4px 0;
+        }
+
+        .col-sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .location-box {
+            margin: 20px 0;
+        }
+
+        .location-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: var(--gold-primary);
+            margin-bottom: 4px;
+        }
+
+        .location-address {
+            font-size: 0.95rem;
+            color: var(--text-white);
+            letter-spacing: 1px;
+        }
+
+        .location-city {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .extra-notes {
+            font-size: 0.8rem;
+            color: var(--gold-light);
+            letter-spacing: 1px;
+            margin: 15px 0 25px 0;
+            text-transform: uppercase;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .time-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 10px 8px;
+            border-radius: 6px;
+            min-width: 65px;
+        }
+
+        .time-box .num {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--gold-light);
+        }
+
+        .time-box .lbl {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-map {
+            background-color: transparent;
+            color: var(--gold-light);
+            border: 1px solid var(--gold-primary);
+        }
+
+        .btn-map:hover {
+            background-color: var(--gold-primary);
+            color: var(--bg-deep);
+        }
+
+        .btn-rsvp {
+            background-color: #25D366;
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-rsvp:hover {
+            background-color: #1ebc57;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <p class="main-title">Te invito a festejar</p>
+        <div class="years-text">MIS 90 AÑOS</div>
+        <div class="name">Juan Filardo</div>
+
+        <p class="quote">"Acompañame a celebrar una vida llena de momentos inolvidables, historias y afectos."</p>
+
+        <div class="divider-dots"></div>
+
+        <div class="event-info-grid">
+            <div class="info-col">
+                <p class="col-title">SÁBADO</p>
+                <p class="col-main">18</p>
+                <p class="col-sub">de noviembre</p>
+            </div>
+
+            <div class="vertical-dot-line"></div>
+
+            <div class="info-col">
+                <p class="col-title">A LAS</p>
+                <p class="col-main">11:00</p>
+                <p class="col-sub">de la mañana</p>
+            </div>
+        </div>
+
+        <div class="divider-dots"></div>
+
+        <div class="location-box">
+            <p class="location-title">SALÓN SUEÑO</p>
+            <p class="location-address">MARIANO ACOSTA 2341</p>
+            <p class="location-city">Saladillo, Provincia de Buenos Aires</p>
+        </div>
+
+        <div class="divider-dots"></div>
+
+        <p class="extra-notes">Vestimenta: Elegante Sport &bull; RSVP antes del 1/11</p>
+
+        <div class="countdown">
+            <div class="time-box"><div class="num" id="d">00</div><div class="lbl">Días</div></div>
+            <div class="time-box"><div class="num" id="h">00</div><div class="lbl">Hs</div></div>
+            <div class="time-box"><div class="num" id="m">00</div><div class="lbl">Min</div></div>
+            <div class="time-box"><div class="num" id="s">00</div><div class="lbl">Seg</div></div>
+        </div>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=Mariano+Acosta+2341+Saladillo+Buenos+Aires" target="_blank" class="btn btn-map">
+            📍 Ver ubicación en Google Maps
+        </a>
+
+        <a href="https://wa.me/5492344400441?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20para%20los%2090%20a%C3%B1os%20de%20Juan%20Filardo." target="_blank" class="btn btn-rsvp">
+            💬 Confirmar asistencia por WhatsApp
+        </a>
+    </div>
+
+    <script>
+        const eventDate = new Date("2026-11-18T11:00:00").getTime();
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = eventDate - now;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('d').innerText = String(days).padStart(2, '0');
+                document.getElementById('h').innerText = String(hours).padStart(2, '0');
+                document.getElementById('m').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('s').innerText = String(seconds).padStart(2, '0');
+            } else {
+                document.querySelector('.countdown').innerHTML = "<p style='color:var(--gold-light); font-family:Cinzel;'>¡Es hoy!</p>";
+            }
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
 
