@@ -1,327 +1,267 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis 90 Años - Juan Filardo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Alex+Brush&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-deep: #0f141c;
-            --card-bg: rgba(23, 31, 43, 0.95);
-            --gold-primary: #d4af37;
-            --gold-light: #f7e7ce;
-            --text-white: #ffffff;
-            --text-muted: #a0acba;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>90 años de Juan Filardo</title>
+<meta name="description" content="Súmate a celebrar los 90 años de Juan Filardo. 18 de noviembre, 12 hs, Salón Sueño, Saladillo.">
+<meta property="og:title" content="Súmate a celebrar los 90 años de Juan Filardo">
+<meta property="og:description" content="18 de noviembre · 12 hs · Salón Sueño, Saladillo">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul: #5E7FA8;
+    --azul-osc: #2E3E5C;
+    --dorado: #C9A227;
+    --texto: #4A5263;
+    --borde: #DDE1EA;
+    --fondo: #EEF1F6;
+    --serif: "Playfair Display", "Didot", "Bodoni 72", Georgia, serif;
+    --script: "Great Vibes", "Snell Roundhand", "Apple Chancery", cursive;
+    --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html, body { margin: 0; background: var(--fondo); color: var(--texto); }
+  body { font-family: var(--serif); -webkit-font-smoothing: antialiased; }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  .pagina { max-width: 560px; margin: 0 auto; background: #fff; min-height: 100vh; }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-deep);
-            color: var(--text-white);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px 12px;
-            background-image: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.15) 0%, transparent 70%), radial-gradient(circle at 50% 100%, #080b10 0%, #0f141c 100%);
-            background-attachment: fixed;
-        }
+  /* ---------- Tarjeta (réplica de la imagen) ---------- */
+  .tarjeta-wrap { container-type: inline-size; }
+  .tarjeta {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    background: #fff;
+  }
+  .marco {
+    position: absolute; inset: 1.66cqw;
+    border: max(1px, .13cqw) solid var(--borde);
+    border-radius: 4.5cqw;
+  }
+  .num {
+    position: absolute;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 94cqw;
+    line-height: 1;
+    color: var(--azul);
+    font-variant-numeric: lining-nums;
+    font-feature-settings: "lnum" 1;
+    user-select: none;
+  }
+  .num.nueve { left: -3cqw; top: -25cqw; }
+  .num.cero  { left: 47cqw;  top: -14cqw; }
 
-        .card {
-            background: var(--card-bg);
-            max-width: 480px;
-            width: 100%;
-            padding: 45px 25px;
-            border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(212, 175, 55, 0.2);
-            border: 2px solid var(--gold-primary);
-            position: relative;
-            text-align: center;
-        }
+  .linea { position: absolute; left: 90.9cqw; width: .55cqw; background: var(--azul); transform-origin: top; }
+  .l1 { top: 0;      height: 6cqw; }
+  .l2 { top: 59cqw;  height: 48cqw; }
+  .fecha-vertical {
+    position: absolute; left: 89.2cqw; top: 112cqw;
+    writing-mode: vertical-rl;
+    font-family: var(--serif); font-size: 3.4cqw; letter-spacing: .28em;
+    color: var(--azul);
+  }
 
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 6px; left: 6px; right: 6px; bottom: 6px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            pointer-events: none;
-        }
+  .sumate, .nombre, .frase, .cuando, .donde, .regalo { z-index: 2; }
+  .sumate {
+    position: absolute; left: 10cqw; top: 70cqw; margin: 0;
+    font-style: italic; font-size: 4.5cqw; line-height: 1.05; color: var(--texto);
+  }
+  .nombre {
+    position: absolute; left: 8.6cqw; top: 80cqw; margin: 0;
+    font-family: var(--script); font-weight: 400; font-size: 11.5cqw; line-height: 1.2;
+    color: var(--dorado); white-space: nowrap;
+  }
+  .frase {
+    position: absolute; left: 8.7cqw; top: 97cqw; width: 70cqw; margin: 0;
+    font-style: italic; font-size: 3.2cqw; line-height: 1.12; color: var(--texto);
+  }
+  .cuando {
+    position: absolute; left: 9cqw; top: 112.6cqw; margin: 0;
+    font-family: var(--sans); font-size: 3.9cqw; letter-spacing: .1em; color: var(--azul-osc);
+  }
+  .donde {
+    position: absolute; left: 9cqw; top: 120.4cqw; margin: 0;
+    font-family: var(--sans); font-size: 2.45cqw; letter-spacing: .1em; line-height: 1.55; color: #556070;
+  }
+  .regalo {
+    position: absolute; right: 14.8cqw; top: 136cqw; margin: 0;
+    font-style: italic; font-size: 3.1cqw; line-height: 1.15; text-align: right; color: var(--texto);
+  }
 
-        .main-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 5px;
-        }
+  /* ---------- Animación de entrada ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .anim .nueve { animation: entra9 1.4s cubic-bezier(.2,.7,.2,1) both; }
+    .anim .cero  { animation: entra0 1.4s .25s cubic-bezier(.2,.7,.2,1) both; }
+    .anim .linea { animation: crece .9s cubic-bezier(.3,.7,.2,1) both; }
+    .anim .l1 { animation-delay: .9s; } .anim .l2 { animation-delay: 1.05s; }
+    .anim .sumate { animation: aparece .9s 1.2s ease-out both; }
+    .anim .nombre { animation: escribe 1.8s 1.6s cubic-bezier(.5,0,.3,1) both; }
+    .anim .frase  { animation: aparece .9s 3.1s ease-out both; }
+    .anim .cuando { animation: aparece .9s 3.4s ease-out both; }
+    .anim .donde  { animation: aparece .9s 3.55s ease-out both; }
+    .anim .fecha-vertical { animation: aparece 1.2s 3.6s ease-out both; }
+    .anim .regalo { animation: aparece .9s 3.9s ease-out both; }
+    .anim .detalles { animation: aparece .9s 4.1s ease-out both; }
+  }
+  @keyframes entra9 { from { opacity: 0; transform: translate(-6cqw, 4cqw); } to { opacity: 1; transform: none; } }
+  @keyframes entra0 { from { opacity: 0; transform: translate(6cqw, -4cqw); } to { opacity: 1; transform: none; } }
+  @keyframes crece  { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes aparece { from { opacity: 0; transform: translateY(1.2cqw); } to { opacity: 1; transform: none; } }
+  @keyframes escribe { from { clip-path: inset(-30% 100% -30% -15%); } to { clip-path: inset(-30% -10% -30% -15%); } }
 
-        .years-text {
-            font-family: 'Cinzel', serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold-light);
-            margin: 10px 0 5px 0;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-        }
+  /* ---------- Detalles debajo de la tarjeta ---------- */
+  .detalles { padding: 8px 9% 48px; text-align: center; }
+  .separador { width: 48px; height: 3px; background: var(--azul); margin: 8px auto 28px; border: 0; }
 
-        .name {
-            font-family: 'Alex Brush', cursive;
-            font-size: 3.8rem;
-            color: var(--gold-light);
-            margin: 5px 0 15px 0;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-        }
+  .cuenta { display: flex; justify-content: center; gap: clamp(14px, 5vw, 30px); margin: 0 0 8px; }
+  .cuenta div { min-width: 52px; }
+  .cuenta b { display: block; font-family: var(--serif); font-weight: 400; font-style: italic; font-size: clamp(34px, 10vw, 48px); line-height: 1; color: var(--azul); font-variant-numeric: tabular-nums; }
+  .cuenta span { font-family: var(--sans); font-size: 12px; letter-spacing: .08em; color: #7A8496; }
+  .faltan { font-style: italic; font-size: 17px; margin: 0 0 32px; }
 
-        .quote {
-            font-size: 0.9rem;
-            font-style: italic;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 25px;
-            padding: 0 10px;
-        }
+  .acciones { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; }
+  .boton {
+    font-family: var(--sans); font-size: 15px; letter-spacing: .03em;
+    padding: 13px 20px; border-radius: 999px; text-decoration: none; cursor: pointer;
+    border: 1.5px solid var(--azul); color: var(--azul-osc); background: #fff;
+    transition: background .2s, color .2s;
+  }
+  .boton:hover { background: #F2F5FA; }
+  .boton:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--dorado); outline-offset: 2px; }
 
-        .divider-dots {
-            border-top: 2px dotted var(--gold-primary);
-            margin: 20px 0;
-            opacity: 0.5;
-        }
+  .rsvp { border: 1.5px solid var(--borde); border-radius: 22px; padding: 28px 22px 26px; }
+  .rsvp h2 { font-family: var(--script); font-weight: 400; color: var(--dorado); font-size: 40px; margin: 0 0 4px; line-height: 1.1; }
+  .rsvp p { margin: 0 0 20px; font-style: italic; font-size: 16px; line-height: 1.45; }
+  .campos { display: grid; grid-template-columns: 1fr 104px; gap: 10px; margin-bottom: 8px; text-align: left; }
+  .campos label { font-family: var(--sans); font-size: 13px; color: #6A7385; display: block; margin-bottom: 5px; }
+  .campos input, .campos select {
+    width: 100%; font-family: var(--sans); font-size: 17px; padding: 12px 12px;
+    border: 1.5px solid var(--borde); border-radius: 12px; color: var(--azul-osc); background: #fff;
+  }
+  .aviso { min-height: 20px; font-family: var(--sans); font-size: 13px; color: #B5452F; margin: 0 0 10px; text-align: left; }
+  .respuestas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .si { background: var(--azul); color: #fff; border-color: var(--azul); }
+  .si:hover { background: #4E6F98; }
+  .nota { font-family: var(--sans); font-size: 13px; color: #7A8496; margin-top: 18px; line-height: 1.5; }
 
-        .event-info-grid {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            margin: 15px 0;
-        }
-
-        .info-col {
-            flex: 1;
-        }
-
-        .vertical-dot-line {
-            width: 1px;
-            height: 60px;
-            border-left: 2px dotted var(--gold-primary);
-            opacity: 0.5;
-        }
-
-        .col-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .col-main {
-            font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--gold-light);
-            margin: 4px 0;
-        }
-
-        .col-sub {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-style: italic;
-        }
-
-        .location-box {
-            margin: 20px 0;
-        }
-
-        .location-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            color: var(--gold-primary);
-            margin-bottom: 4px;
-        }
-
-        .location-address {
-            font-size: 0.95rem;
-            color: var(--text-white);
-            letter-spacing: 1px;
-        }
-
-        .location-city {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        .extra-notes {
-            font-size: 0.8rem;
-            color: var(--gold-light);
-            letter-spacing: 1px;
-            margin: 15px 0 25px 0;
-            text-transform: uppercase;
-        }
-
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .time-box {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            padding: 10px 8px;
-            border-radius: 6px;
-            min-width: 65px;
-        }
-
-        .time-box .num {
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--gold-light);
-        }
-
-        .time-box .lbl {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 12px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-map {
-            background-color: transparent;
-            color: var(--gold-light);
-            border: 1px solid var(--gold-primary);
-        }
-
-        .btn-map:hover {
-            background-color: var(--gold-primary);
-            color: var(--bg-deep);
-        }
-
-        .btn-rsvp {
-            background-color: #25D366;
-            color: #ffffff;
-            border: none;
-        }
-
-        .btn-rsvp:hover {
-            background-color: #1ebc57;
-        }
-    </style>
+  @media (min-width: 560px) { body { padding: 24px 0; } .pagina { min-height: 0; border-radius: 18px; overflow: hidden; box-shadow: 0 10px 40px rgba(46,62,92,.12); } }
+  @media (max-width: 360px) { .campos { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
+<main class="pagina anim">
 
-    <div class="card">
-        <p class="main-title">Te invito a festejar</p>
-        <div class="years-text">MIS 90 AÑOS</div>
-        <div class="name">Juan Filardo</div>
+  <section class="tarjeta-wrap" aria-label="Invitación">
+    <div class="tarjeta">
+      <div class="marco"></div>
+      <span class="num nueve" aria-hidden="true">9</span>
+      <span class="num cero" aria-hidden="true">0</span>
 
-        <p class="quote">"Acompañame a celebrar una vida llena de momentos inolvidables, historias y afectos."</p>
+      <span class="linea l1"></span>
+      <span class="linea l2"></span>
+      <span class="fecha-vertical" aria-hidden="true">18 NOV. 2026</span>
 
-        <div class="divider-dots"></div>
+      <p class="sumate">Súmate a celebrar<br>los 90 años de</p>
+      <h1 class="nombre">Juan Filardo</h1>
+      <p class="frase">"Una vida para celebrar, una historia para compartir. Te esperamos para festejar este gran hito juntos."</p>
+      <p class="cuando">18 DE NOVIEMBRE | 12 Hs</p>
+      <p class="donde">MARIANO ACOSTA 2341 – Salón Sueño –<br>Saladillo, Provincia de Buenos Aires</p>
+      <p class="regalo">El mejor regalo es tu presencia.<br>¡No traigas nada, solo ganas de festejar!</p>
+    </div>
+  </section>
 
-        <div class="event-info-grid">
-            <div class="info-col">
-                <p class="col-title">SÁBADO</p>
-                <p class="col-main">18</p>
-                <p class="col-sub">de noviembre</p>
-            </div>
+  <section class="detalles">
+    <hr class="separador">
 
-            <div class="vertical-dot-line"></div>
+    <div class="cuenta" id="cuenta" aria-live="polite">
+      <div><b id="d">–</b><span>días</span></div>
+      <div><b id="h">–</b><span>horas</span></div>
+      <div><b id="m">–</b><span>minutos</span></div>
+      <div><b id="s">–</b><span>segundos</span></div>
+    </div>
+    <p class="faltan" id="faltan">para el gran día</p>
 
-            <div class="info-col">
-                <p class="col-title">A LAS</p>
-                <p class="col-main">11:00</p>
-                <p class="col-sub">de la mañana</p>
-            </div>
-        </div>
-
-        <div class="divider-dots"></div>
-
-        <div class="location-box">
-            <p class="location-title">SALÓN SUEÑO</p>
-            <p class="location-address">MARIANO ACOSTA 2341</p>
-            <p class="location-city">Saladillo, Provincia de Buenos Aires</p>
-        </div>
-
-        <div class="divider-dots"></div>
-
-        <p class="extra-notes">Vestimenta: Elegante Sport &bull; RSVP antes del 1/11</p>
-
-        <div class="countdown">
-            <div class="time-box"><div class="num" id="d">00</div><div class="lbl">Días</div></div>
-            <div class="time-box"><div class="num" id="h">00</div><div class="lbl">Hs</div></div>
-            <div class="time-box"><div class="num" id="m">00</div><div class="lbl">Min</div></div>
-            <div class="time-box"><div class="num" id="s">00</div><div class="lbl">Seg</div></div>
-        </div>
-
-        <a href="https://www.google.com/maps/search/?api=1&query=Mariano+Acosta+2341+Saladillo+Buenos+Aires" target="_blank" class="btn btn-map">
-            📍 Ver ubicación en Google Maps
-        </a>
-
-        <a href="https://wa.me/5492344400441?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20para%20los%2090%20a%C3%B1os%20de%20Juan%20Filardo." target="_blank" class="btn btn-rsvp">
-            💬 Confirmar asistencia por WhatsApp
-        </a>
+    <div class="acciones">
+      <a class="boton" href="https://www.google.com/maps/search/?api=1&query=Mariano+Acosta+2341+Saladillo+Buenos+Aires" target="_blank" rel="noopener">📍 Cómo llegar</a>
+      <a class="boton" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=90%20a%C3%B1os%20de%20Juan%20Filardo&dates=20261118T150000Z/20261118T210000Z&location=Sal%C3%B3n%20Sue%C3%B1o%2C%20Mariano%20Acosta%202341%2C%20Saladillo&details=%C2%A1Te%20esperamos%20para%20festejar!" target="_blank" rel="noopener">🗓️ Agendar</a>
     </div>
 
-    <script>
-        const eventDate = new Date("2026-11-18T11:00:00").getTime();
+    <div class="rsvp">
+      <h2>¿Venís?</h2>
+      <p>Contanos antes del 1 de noviembre.<br>Se abre WhatsApp con el mensaje listo, solo tenés que enviarlo.</p>
 
-        function updateTimer() {
-            const now = new Date().getTime();
-            const diff = eventDate - now;
+      <div class="campos">
+        <div>
+          <label for="nombre">Tu nombre</label>
+          <input id="nombre" type="text" autocomplete="name" placeholder="Ej: Marta y Carlos">
+        </div>
+        <div>
+          <label for="cant">Personas</label>
+          <select id="cant">
+            <option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>
+          </select>
+        </div>
+      </div>
+      <p class="aviso" id="aviso" role="alert"></p>
 
-            if (diff > 0) {
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      <div class="respuestas">
+        <button class="boton si" type="button" data-r="si">¡Voy!</button>
+        <button class="boton" type="button" data-r="no">No puedo ir</button>
+      </div>
+    </div>
+  </section>
+</main>
 
-                document.getElementById('d').innerText = String(days).padStart(2, '0');
-                document.getElementById('h').innerText = String(hours).padStart(2, '0');
-                document.getElementById('m').innerText = String(minutes).padStart(2, '0');
-                document.getElementById('s').innerText = String(seconds).padStart(2, '0');
-            } else {
-                document.querySelector('.countdown').innerHTML = "<p style='color:var(--gold-light); font-family:Cinzel;'>¡Es hoy!</p>";
-            }
-        }
+<script>
+  // ====== CONFIGURACIÓN ======
+  const TELEFONO = "5492344400441";              // número que recibe las confirmaciones
+  const FECHA = new Date("2026-11-18T12:00:00-03:00"); // día y hora del festejo
+  // ===========================
 
-        setInterval(updateTimer, 1000);
-        updateTimer();
-    </script>
+  const $ = id => document.getElementById(id);
+  const dos = n => String(n).padStart(2, "0");
+
+  function actualizar() {
+    const ms = FECHA - new Date();
+    if (ms <= 0) {
+      $("cuenta").style.display = "none";
+      $("faltan").textContent = Date.now() - FECHA < 864e5 ? "¡Hoy es el gran día! 🎉" : "¡Gracias por acompañarnos!";
+      return;
+    }
+    const seg = Math.floor(ms / 1000);
+    $("d").textContent = Math.floor(seg / 86400);
+    $("h").textContent = dos(Math.floor(seg % 86400 / 3600));
+    $("m").textContent = dos(Math.floor(seg % 3600 / 60));
+    $("s").textContent = dos(seg % 60);
+  }
+  actualizar();
+  setInterval(actualizar, 1000);
+
+  document.querySelectorAll("[data-r]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const nombre = $("nombre").value.trim();
+      if (!nombre) {
+        $("aviso").textContent = "Escribí tu nombre para que sepamos quién confirma.";
+        $("nombre").focus();
+        return;
+      }
+      $("aviso").textContent = "";
+      const n = Number($("cant").value);
+      const texto = btn.dataset.r === "si"
+        ? `¡Hola! Soy ${nombre}. Confirmo que vamos a los 90 años de Juan 🎉 Somos ${n} ${n === 1 ? "persona" : "personas"}.`
+        : `¡Hola! Soy ${nombre}. Lamentablemente no voy a poder ir a los 90 años de Juan. ¡Un abrazo enorme para él!`;
+      window.open(`https://wa.me/${TELEFONO}?text=${encodeURIComponent(texto)}`, "_blank");
+    });
+  });
+</script>
 </body>
 </html>
-
