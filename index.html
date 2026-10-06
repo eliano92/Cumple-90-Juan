@@ -88,6 +88,10 @@
     position: absolute; left: 9cqw; top: 112.6cqw; margin: 0;
     font-family: var(--sans); font-size: 3.9cqw; letter-spacing: .1em; color: var(--azul-osc);
   }
+  .donde { text-decoration: none; display: block; }
+  .donde:hover, .donde:focus-visible { text-decoration: underline; text-decoration-color: var(--borde); text-underline-offset: .5cqw; }
+  .donde:focus-visible { outline: 2px solid var(--dorado); outline-offset: 1cqw; border-radius: 1cqw; }
+  .pin { position: absolute; left: -4.4cqw; top: .3cqw; width: 2.6cqw; height: 3.5cqw; color: var(--dorado); }
   .donde {
     position: absolute; left: 9cqw; top: 120.4cqw; margin: 0;
     font-family: var(--sans); font-size: 2.45cqw; letter-spacing: .1em; line-height: 1.55; color: #556070;
@@ -108,6 +112,7 @@
     .anim .frase  { animation: aparece .9s 3.1s ease-out both; }
     .anim .cuando { animation: aparece .9s 3.4s ease-out both; }
     .anim .donde  { animation: aparece .9s 3.55s ease-out both; }
+    .anim .pin { animation: cae .7s 4.1s cubic-bezier(.3,1.6,.5,1) both; }
     .anim .fecha-vertical { animation: aparece 1.2s 3.6s ease-out both; }
     .anim .regalo { animation: aparece .9s 3.9s ease-out both; }
     .anim .detalles { animation: aparece .9s 4.1s ease-out both; }
@@ -116,14 +121,16 @@
   @keyframes entra0 { from { opacity: 0; transform: translate(6cqw, -4cqw); } to { opacity: 1; transform: none; } }
   @keyframes crece  { from { transform: scaleY(0); } to { transform: scaleY(1); } }
   @keyframes aparece { from { opacity: 0; transform: translateY(1.2cqw); } to { opacity: 1; transform: none; } }
-  @keyframes escribe { from { clip-path: inset(-30% 100% -30% -15%); } to { clip-path: inset(-30% -10% -30% -15%); } }
+  @keyframes cae { from { opacity: 0; transform: translateY(-3cqw); } to { opacity: 1; transform: none; } }
+  @keyframes escribe { from { clip-path: inset(-30% 115% -30% -15%); } to { clip-path: inset(-30% -10% -30% -15%); } }
 
   /* ---------- Detalles debajo de la tarjeta ---------- */
   .detalles { padding: 8px 9% 48px; text-align: center; }
   .separador { width: 48px; height: 3px; background: var(--azul); margin: 8px auto 28px; border: 0; }
 
   .cuenta { display: flex; justify-content: center; gap: clamp(14px, 5vw, 30px); margin: 0 0 8px; }
-  .cuenta div { min-width: 52px; }
+  .cuenta div { min-width: 52px; position: relative; }
+  .cuenta div + div::before { content: ""; position: absolute; left: calc(clamp(14px, 5vw, 30px) / -2); top: 6px; bottom: 6px; width: 1.5px; background: var(--borde); }
   .cuenta b { display: block; font-family: var(--serif); font-weight: 400; font-style: italic; font-size: clamp(34px, 10vw, 48px); line-height: 1; color: var(--azul); font-variant-numeric: tabular-nums; }
   .cuenta span { font-family: var(--sans); font-size: 12px; letter-spacing: .08em; color: #7A8496; }
   .faltan { font-style: italic; font-size: 17px; margin: 0 0 32px; }
@@ -136,6 +143,8 @@
     transition: background .2s, color .2s;
   }
   .boton:hover { background: #F2F5FA; }
+  .acciones .boton { display: inline-flex; align-items: center; gap: 8px; }
+  .ico { width: 18px; height: 18px; color: var(--azul); flex: none; }
   .boton:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--dorado); outline-offset: 2px; }
 
   .rsvp { border: 1.5px solid var(--borde); border-radius: 22px; padding: 28px 22px 26px; }
@@ -148,16 +157,20 @@
     border: 1.5px solid var(--borde); border-radius: 12px; color: var(--azul-osc); background: #fff;
   }
   .aviso { min-height: 20px; font-family: var(--sans); font-size: 13px; color: #B5452F; margin: 0 0 10px; text-align: left; }
+  .rsvp .aviso { font-style: normal; font-size: 13px; margin: 0 0 10px; line-height: 1.4; }
+  .rsvp .nota { font-family: var(--sans); font-style: normal; font-size: 13px; color: #7A8496; margin: 16px 0 0; line-height: 1.5; }
   .respuestas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .si { background: var(--azul); color: #fff; border-color: var(--azul); }
   .si:hover { background: #4E6F98; }
   .nota { font-family: var(--sans); font-size: 13px; color: #7A8496; margin-top: 18px; line-height: 1.5; }
 
+  #confeti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; }
   @media (min-width: 560px) { body { padding: 24px 0; } .pagina { min-height: 0; border-radius: 18px; overflow: hidden; box-shadow: 0 10px 40px rgba(46,62,92,.12); } }
   @media (max-width: 360px) { .campos { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
+<canvas id="confeti" aria-hidden="true"></canvas>
 <main class="pagina anim">
 
   <section class="tarjeta-wrap" aria-label="Invitación">
@@ -172,9 +185,9 @@
 
       <p class="sumate">Súmate a celebrar<br>los 90 años de</p>
       <h1 class="nombre">Juan Filardo</h1>
-      <p class="frase">"Una vida para celebrar, una historia para compartir. Te esperamos para festejar este gran hito juntos."</p>
+      <p class="frase">"Una vida para celebrar, una historia para compartir. Te esperamos para festejar este gran día juntos."</p>
       <p class="cuando">18 DE NOVIEMBRE | 12 Hs</p>
-      <p class="donde">MARIANO ACOSTA 2341 – Salón Sueño –<br>Saladillo, Provincia de Buenos Aires</p>
+      <a class="donde" href="https://www.google.com/maps/search/?api=1&query=Mariano+Acosta+2341+Saladillo+Buenos+Aires" target="_blank" rel="noopener" aria-label="Ver ubicación en Google Maps: Mariano Acosta 2341, Salón Sueño, Saladillo"><svg class="pin" viewBox="0 0 24 32" aria-hidden="true"><path d="M12 1C6 1 1.5 5.5 1.5 11.3 1.5 19 12 31 12 31s10.5-12 10.5-19.7C22.5 5.5 18 1 12 1z" fill="currentColor"/><circle cx="12" cy="11.3" r="4" fill="#fff"/></svg>MARIANO ACOSTA 2341 – Salón Sueño –<br>Saladillo, Provincia de Buenos Aires</a>
       <p class="regalo">El mejor regalo es tu presencia.<br>¡No traigas nada, solo ganas de festejar!</p>
     </div>
   </section>
@@ -188,16 +201,16 @@
       <div><b id="m">–</b><span>minutos</span></div>
       <div><b id="s">–</b><span>segundos</span></div>
     </div>
-    <p class="faltan" id="faltan">para el gran día</p>
+    <p class="faltan" id="faltan">para el festejo</p>
 
     <div class="acciones">
-      <a class="boton" href="https://www.google.com/maps/search/?api=1&query=Mariano+Acosta+2341+Saladillo+Buenos+Aires" target="_blank" rel="noopener">📍 Cómo llegar</a>
-      <a class="boton" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=90%20a%C3%B1os%20de%20Juan%20Filardo&dates=20261118T150000Z/20261118T210000Z&location=Sal%C3%B3n%20Sue%C3%B1o%2C%20Mariano%20Acosta%202341%2C%20Saladillo&details=%C2%A1Te%20esperamos%20para%20festejar!" target="_blank" rel="noopener">🗓️ Agendar</a>
+      <a class="boton" href="https://www.google.com/maps/search/?api=1&query=Mariano+Acosta+2341+Saladillo+Buenos+Aires" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-7.2 7-12.5A7 7 0 0 0 5 9.5C5 14.8 12 22 12 22z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>Cómo llegar</a>
+      <a class="boton" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=90%20a%C3%B1os%20de%20Juan%20Filardo&dates=20261118T150000Z/20261118T210000Z&location=Sal%C3%B3n%20Sue%C3%B1o%2C%20Mariano%20Acosta%202341%2C%20Saladillo&details=%C2%A1Te%20esperamos%20para%20festejar!" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>Agendar</a>
     </div>
 
     <div class="rsvp">
       <h2>¿Venís?</h2>
-      <p>Contanos antes del 1 de noviembre.<br>Se abre WhatsApp con el mensaje listo, solo tenés que enviarlo.</p>
+      <p>Por favor, confirmá tu asistencia<br>antes del 1 de noviembre.</p>
 
       <div class="campos">
         <div>
@@ -217,6 +230,7 @@
         <button class="boton si" type="button" data-r="si">¡Voy!</button>
         <button class="boton" type="button" data-r="no">No puedo ir</button>
       </div>
+      <p class="nota">Al tocar un botón se abre WhatsApp con tu respuesta escrita. Solo tenés que enviarla.</p>
     </div>
   </section>
 </main>
@@ -246,6 +260,42 @@
   actualizar();
   setInterval(actualizar, 1000);
 
+
+  // ====== Confeti dorado y azul ======
+  const lienzo = $("confeti"), ctx = lienzo.getContext("2d");
+  const sinMovimiento = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let piezas = [], corriendo = false;
+  function ajustar() { const r = devicePixelRatio || 1; lienzo.width = innerWidth * r; lienzo.height = innerHeight * r; ctx.setTransform(r,0,0,r,0,0); }
+  addEventListener("resize", ajustar); ajustar();
+  const COLORES = ["#C9A227", "#E2C66B", "#5E7FA8", "#A9BCD6"];
+  function lanzar(x, y, cantidad, explosion) {
+    if (sinMovimiento) return;
+    for (let i = 0; i < cantidad; i++) {
+      const ang = explosion ? Math.random() * Math.PI * 2 : Math.PI / 2;
+      const vel = explosion ? 3 + Math.random() * 6 : 1 + Math.random() * 2;
+      piezas.push({
+        x: explosion ? x : Math.random() * innerWidth, y: explosion ? y : -20 - Math.random() * innerHeight * .6,
+        vx: Math.cos(ang) * vel, vy: explosion ? Math.sin(ang) * vel - 4 : vel,
+        w: 5 + Math.random() * 5, h: 8 + Math.random() * 8, rot: Math.random() * 6, vr: (Math.random() - .5) * .25,
+        osc: Math.random() * 6, c: COLORES[i % COLORES.length], vida: 0
+      });
+    }
+    if (!corriendo) { corriendo = true; requestAnimationFrame(cuadro); }
+  }
+  function cuadro() {
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    piezas = piezas.filter(p => p.y < innerHeight + 30 && p.vida < 600);
+    for (const p of piezas) {
+      p.vida++; p.vy = Math.min(p.vy + .12, 3.2); p.vx *= .98; p.osc += .05;
+      p.x += p.vx + Math.sin(p.osc) * .6; p.y += p.vy; p.rot += p.vr;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.scale(Math.cos(p.osc * 1.6), 1);
+      ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore();
+    }
+    if (piezas.length) requestAnimationFrame(cuadro); else { corriendo = false; ctx.clearRect(0, 0, innerWidth, innerHeight); }
+  }
+  setTimeout(() => lanzar(0, 0, 70, false), 3300); // una lluvia suave al terminar de escribirse el nombre
+
   document.querySelectorAll("[data-r]").forEach(btn => {
     btn.addEventListener("click", () => {
       const nombre = $("nombre").value.trim();
@@ -256,6 +306,7 @@
       }
       $("aviso").textContent = "";
       const n = Number($("cant").value);
+      if (btn.dataset.r === "si") { const r = btn.getBoundingClientRect(); lanzar(r.left + r.width / 2, r.top, 60, true); }
       const texto = btn.dataset.r === "si"
         ? `¡Hola! Soy ${nombre}. Confirmo que vamos a los 90 años de Juan 🎉 Somos ${n} ${n === 1 ? "persona" : "personas"}.`
         : `¡Hola! Soy ${nombre}. Lamentablemente no voy a poder ir a los 90 años de Juan. ¡Un abrazo enorme para él!`;
